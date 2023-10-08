@@ -1,9 +1,9 @@
 import { writable } from "svelte/store";
 export interface WebSearchParameters {
-	useSearch: boolean;
-	nItems: number;
+  useSearch: boolean;
+  nItems: number;
 }
 export const webSearchParameters = writable<WebSearchParameters>({
-	useSearch: false,
-	nItems: 5,
+  useSearch: false,
+  nItems: 5,
 });

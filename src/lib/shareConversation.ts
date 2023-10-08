@@ -5,29 +5,29 @@ import { page } from "$app/stores";
 import { get } from "svelte/store";
 import { getShareUrl } from "./utils/getShareUrl";
 export async function shareConversation(id: string, title: string) {
-	try {
-		if (id.length === 7) {
-			const url = get(page).url;
-			share(getShareUrl(url, id), title);
-		} else {
-			const res = await fetch(`${base}/conversation/${id}/share`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
+  try {
+    if (id.length === 7) {
+      const url = get(page).url;
+      share(getShareUrl(url, id), title);
+    } else {
+      const res = await fetch(`${base}/conversation/${id}/share`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-			if (!res.ok) {
-				error.set("Error while sharing conversation, try again.");
-				console.error("Error while sharing conversation: " + (await res.text()));
-				return;
-			}
+      if (!res.ok) {
+        error.set("Error while sharing conversation, try again.");
+        console.error("Error while sharing conversation: " + (await res.text()));
+        return;
+      }
 
-			const { url } = await res.json();
-			share(url, title);
-		}
-	} catch (err) {
-		error.set(ERROR_MESSAGES.default);
-		console.error(err);
-	}
+      const { url } = await res.json();
+      share(url, title);
+    }
+  } catch (err) {
+    error.set(ERROR_MESSAGES.default);
+    console.error(err);
+  }
 }

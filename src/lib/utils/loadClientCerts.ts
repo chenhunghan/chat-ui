@@ -27,24 +27,24 @@ import { setGlobalDispatcher, Agent } from "undici";
  * [NodeJS Native Fetch API](https://nodejs.org/docs/latest-v19.x/api/globals.html#fetch)
  */
 export function loadClientCertificates(
-	clientCertPath: string,
-	clientKeyPath: string,
-	caCertPath?: string,
-	clientKeyPassword?: string,
-	rejectUnauthorized?: boolean
+  clientCertPath: string,
+  clientKeyPath: string,
+  caCertPath?: string,
+  clientKeyPassword?: string,
+  rejectUnauthorized?: boolean
 ): void {
-	const clientCert = fs.readFileSync(clientCertPath);
-	const clientKey = fs.readFileSync(clientKeyPath);
-	const caCert = caCertPath ? fs.readFileSync(caCertPath) : undefined;
-	const agent = new Agent({
-		connect: {
-			cert: clientCert,
-			key: clientKey,
-			ca: caCert,
-			passphrase: clientKeyPassword,
-			rejectUnauthorized: rejectUnauthorized,
-		},
-	});
+  const clientCert = fs.readFileSync(clientCertPath);
+  const clientKey = fs.readFileSync(clientKeyPath);
+  const caCert = caCertPath ? fs.readFileSync(caCertPath) : undefined;
+  const agent = new Agent({
+    connect: {
+      cert: clientCert,
+      key: clientKey,
+      ca: caCert,
+      passphrase: clientKeyPassword,
+      rejectUnauthorized: rejectUnauthorized,
+    },
+  });
 
-	setGlobalDispatcher(agent);
+  setGlobalDispatcher(agent);
 }

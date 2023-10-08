@@ -5,25 +5,25 @@ import { collections } from "./database";
 
 let closed = false;
 process.on("SIGINT", () => {
-	closed = true;
+  closed = true;
 });
 
 export let abortedGenerations: Map<string, Date> = new Map();
 
 async function maintainAbortedGenerations() {
-	while (!closed) {
-		await setTimeout(1000);
+  while (!closed) {
+    await setTimeout(1000);
 
-		try {
-			const aborts = await collections.abortedGenerations.find({}).sort({ createdAt: 1 }).toArray();
+    try {
+      const aborts = await collections.abortedGenerations.find({}).sort({ createdAt: 1 }).toArray();
 
-			abortedGenerations = new Map(
-				aborts.map(({ conversationId, createdAt }) => [conversationId.toString(), createdAt])
-			);
-		} catch (err) {
-			console.error(err);
-		}
-	}
+      abortedGenerations = new Map(
+        aborts.map(({ conversationId, createdAt }) => [conversationId.toString(), createdAt])
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }
 }
 
 maintainAbortedGenerations();

@@ -3,24 +3,24 @@ import type { Timestamps } from "./Timestamps";
 import type { User } from "./User";
 
 export interface Settings extends Timestamps {
-	userId?: User["_id"];
-	sessionId?: string;
+  userId?: User["_id"];
+  sessionId?: string;
 
-	/**
-	 * Note: Only conversations with this settings explicitly set to true should be shared.
-	 *
-	 * This setting is explicitly set to true when users accept the ethics modal.
-	 * */
-	shareConversationsWithModelAuthors: boolean;
-	ethicsModalAcceptedAt: Date | null;
-	activeModel: string;
+  /**
+   * Note: Only conversations with this settings explicitly set to true should be shared.
+   *
+   * This setting is explicitly set to true when users accept the ethics modal.
+   * */
+  shareConversationsWithModelAuthors: boolean;
+  ethicsModalAcceptedAt: Date | null;
+  activeModel: string;
 
-	// model name and system prompts
-	customPrompts?: Record<string, string>;
+  // model name and system prompts
+  customPrompts?: Record<string, string>;
 }
 
 // TODO: move this to a constant file along with other constants
 export const DEFAULT_SETTINGS = {
-	shareConversationsWithModelAuthors: true,
-	activeModel: defaultModel.id,
+  shareConversationsWithModelAuthors: true,
+  activeModel: defaultModel.id,
 };
