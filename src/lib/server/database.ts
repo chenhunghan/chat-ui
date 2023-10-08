@@ -8,12 +8,6 @@ import type { Settings } from "$lib/types/Settings";
 import type { User } from "$lib/types/User";
 import type { MessageEvent } from "$lib/types/MessageEvent";
 
-if (!MONGODB_URL) {
-  throw new Error(
-    "Please specify the MONGODB_URL environment variable inside .env.local. Set it to mongodb://localhost:27017 if you are running MongoDB locally, or to a MongoDB Atlas free instance for example."
-  );
-}
-
 const client = new MongoClient(MONGODB_URL, {
   directConnection: MONGODB_DIRECT_CONNECTION === "true",
 });
