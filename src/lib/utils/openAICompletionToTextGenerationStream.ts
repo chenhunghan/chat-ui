@@ -6,27 +6,27 @@ import type { Stream } from "openai/streaming";
  * Transform a stream of OpenAI.Completions.Completion into a stream of TextGenerationStreamOutput
  */
 export async function* openAICompletionToTextGenerationStream(
-	completionStream: Stream<OpenAI.Completions.Completion>
+  completionStream: Stream<OpenAI.Completions.Completion>
 ) {
-	let generatedText = "";
-	let tokenId = 0;
-	for await (const completion of completionStream) {
-		const { choices } = completion;
-		const { text } = choices[0];
-		const last = choices[0]?.finish_reason === "stop";
-		if (text) {
-			generatedText = generatedText + text;
-		}
-		const output: TextGenerationStreamOutput = {
-			token: {
-				id: tokenId++,
-				text,
-				logprob: 0,
-				special: false,
-			},
-			generated_text: last ? generatedText : null,
-			details: null,
-		};
-		yield output;
-	}
+  let generatedText = "";
+  let tokenId = 0;
+  for await (const completion of completionStream) {
+    const { choices } = completion;
+    const { text } = choices[0];
+    const last = choices[0]?.finish_reason === "stop";
+    if (text) {
+      generatedText = generatedText + text;
+    }
+    const output: TextGenerationStreamOutput = {
+      token: {
+        id: tokenId++,
+        text,
+        logprob: 0,
+        special: false,
+      },
+      generated_text: last ? generatedText : null,
+      details: null,
+    };
+    yield output;
+  }
 }

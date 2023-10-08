@@ -4,19 +4,19 @@ import type { Timestamps } from "./Timestamps";
 import type { User } from "./User";
 
 export interface Conversation extends Timestamps {
-	_id: ObjectId;
+  _id: ObjectId;
 
-	sessionId?: string;
-	userId?: User["_id"];
+  sessionId?: string;
+  userId?: User["_id"];
 
-	model: string;
+  model: string;
 
-	title: string;
-	messages: Message[];
+  title: string;
+  messages: Message[];
 
-	meta?: {
-		fromShareId?: string;
-	};
+  meta?: {
+    fromShareId?: string;
+  };
 
-	preprompt?: string;
+  preprompt?: string;
 }

@@ -9,60 +9,60 @@ import { models, validateModel } from "$lib/server/models";
 import { authCondition } from "$lib/server/auth";
 
 export const POST: RequestHandler = async ({ locals, request }) => {
-	const body = await request.text();
+  const body = await request.text();
 
-	let title = "";
-	let messages: Message[] = [];
+  let title = "";
+  let messages: Message[] = [];
 
-	const values = z
-		.object({
-			fromShare: z.string().optional(),
-			model: validateModel(models),
-			preprompt: z.string().optional(),
-		})
-		.parse(JSON.parse(body));
+  const values = z
+    .object({
+      fromShare: z.string().optional(),
+      model: validateModel(models),
+      preprompt: z.string().optional(),
+    })
+    .parse(JSON.parse(body));
 
-	let preprompt = values.preprompt;
+  let preprompt = values.preprompt;
 
-	if (values.fromShare) {
-		const conversation = await collections.sharedConversations.findOne({
-			_id: values.fromShare,
-		});
+  if (values.fromShare) {
+    const conversation = await collections.sharedConversations.findOne({
+      _id: values.fromShare,
+    });
 
-		if (!conversation) {
-			throw error(404, "Conversation not found");
-		}
+    if (!conversation) {
+      throw error(404, "Conversation not found");
+    }
 
-		title = conversation.title;
-		messages = conversation.messages;
-		values.model = conversation.model;
-		preprompt = conversation.preprompt;
-	}
+    title = conversation.title;
+    messages = conversation.messages;
+    values.model = conversation.model;
+    preprompt = conversation.preprompt;
+  }
 
-	const model = models.find((m) => m.name === values.model);
+  const model = models.find((m) => m.name === values.model);
 
-	const res = await collections.conversations.insertOne({
-		_id: new ObjectId(),
-		title:
-			title ||
-			"Untitled " + ((await collections.conversations.countDocuments(authCondition(locals))) + 1),
-		messages,
-		model: values.model,
-		preprompt: preprompt === model?.preprompt ? undefined : preprompt,
-		createdAt: new Date(),
-		updatedAt: new Date(),
-		...(locals.user ? { userId: locals.user._id } : { sessionId: locals.sessionId }),
-		...(values.fromShare ? { meta: { fromShareId: values.fromShare } } : {}),
-	});
+  const res = await collections.conversations.insertOne({
+    _id: new ObjectId(),
+    title:
+      title ||
+      "Untitled " + ((await collections.conversations.countDocuments(authCondition(locals))) + 1),
+    messages,
+    model: values.model,
+    preprompt: preprompt === model?.preprompt ? undefined : preprompt,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    ...(locals.user ? { userId: locals.user._id } : { sessionId: locals.sessionId }),
+    ...(values.fromShare ? { meta: { fromShareId: values.fromShare } } : {}),
+  });
 
-	return new Response(
-		JSON.stringify({
-			conversationId: res.insertedId.toString(),
-		}),
-		{ headers: { "Content-Type": "application/json" } }
-	);
+  return new Response(
+    JSON.stringify({
+      conversationId: res.insertedId.toString(),
+    }),
+    { headers: { "Content-Type": "application/json" } }
+  );
 };
 
 export const GET: RequestHandler = async () => {
-	throw redirect(302, `${base}/`);
+  throw redirect(302, `${base}/`);
 };
