@@ -9,7 +9,7 @@ app_port: 3000
 
 # Chat UI
 
-A fork of [chat-ui](https://github.com/huggingface/chat-ui) that supports OpenAI APIs>.
+A fork of [chat-ui](https://github.com/huggingface/chat-ui) that supports OpenAI APIs.
 
 A chat interface using open source models, eg OpenAssistant or Llama. It is a SvelteKit app and it powers the [HuggingChat app on hf.co/chat](https://huggingface.co/chat).
 
