@@ -1,4 +1,5 @@
-import { MONGODB_URL, MONGODB_DB_NAME, MONGODB_DIRECT_CONNECTION } from "$env/static/private";
+import { MONGODB_DB_NAME, MONGODB_DIRECT_CONNECTION } from "$env/static/private";
+import { env } from "$env/dynamic/private";
 import { MongoClient } from "mongodb";
 import type { Conversation } from "$lib/types/Conversation";
 import type { SharedConversation } from "$lib/types/SharedConversation";
@@ -8,7 +9,7 @@ import type { Settings } from "$lib/types/Settings";
 import type { User } from "$lib/types/User";
 import type { MessageEvent } from "$lib/types/MessageEvent";
 
-const client = new MongoClient(MONGODB_URL, {
+const client = new MongoClient(env.MONGODB_URL, {
   directConnection: MONGODB_DIRECT_CONNECTION === "true",
 });
 
