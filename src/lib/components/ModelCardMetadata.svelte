@@ -15,7 +15,7 @@
     : 'text-gray-800 dark:bg-gray-100 dark:text-gray-600'}"
 >
   <a
-    href={model.modelUrl || "https://huggingface.co/" + model.name}
+    href={model.modelUrl}
     target="_blank"
     rel="noreferrer"
     class="flex items-center hover:underline"
@@ -25,7 +25,7 @@
   >
   {#if model.datasetName || model.datasetUrl}
     <a
-      href={model.datasetUrl || "https://huggingface.co/datasets/" + model.datasetName}
+      href={model.datasetUrl}
       target="_blank"
       rel="noreferrer"
       class="flex items-center hover:underline"
