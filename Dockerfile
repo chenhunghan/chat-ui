@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # read the doc: https://huggingface.co/docs/hub/spaces-sdks-docker
 # you will also find guides on how best to write your Dockerfile
-FROM node:19 as builder-production
+FROM node:18 as builder-production
 
 WORKDIR /app
 
@@ -19,9 +19,9 @@ RUN --mount=type=cache,target=/app/.npm \
 COPY --link --chown=1000 . .
 
 RUN --mount=type=secret,id=DOTENV_LOCAL,dst=.env.local \
-    npm run build
+        npm run build
 
-FROM node:19-slim
+FROM node:18-slim
 
 RUN npm install -g pm2
 
