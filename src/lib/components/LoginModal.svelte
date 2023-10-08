@@ -3,7 +3,6 @@
   import { base } from "$app/paths";
   import { page } from "$app/stores";
   import { PUBLIC_APP_DATA_SHARING, PUBLIC_APP_NAME, PUBLIC_VERSION } from "$env/static/public";
-  import LogoHuggingFaceBorderless from "$lib/components/icons/LogoHuggingFaceBorderless.svelte";
   import Modal from "$lib/components/Modal.svelte";
   import type { LayoutData } from "../../routes/$types";
   import Logo from "./icons/Logo.svelte";
@@ -55,9 +54,6 @@
           class="mt-2 flex items-center whitespace-nowrap rounded-full bg-black px-5 py-2 text-lg font-semibold text-gray-100 transition-colors hover:bg-primary-500"
         >
           Sign in
-          {#if PUBLIC_APP_NAME === "HuggingChat"}
-            with <LogoHuggingFaceBorderless classNames="text-xl mr-1 ml-1.5" /> Hugging Face
-          {/if}
         </button>
       {:else}
         <input type="hidden" name="ethicsModalAccepted" value={true} />

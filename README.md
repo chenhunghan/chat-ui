@@ -1,5 +1,6 @@
 ---
 title: chat-ui
+openai-api: true
 emoji: 🔥
 colorFrom: purple
 colorTo: purple
@@ -12,17 +13,17 @@ app_port: 3000
 
 # Chat UI
 
-![Chat UI repository thumbnail](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/chatui-websearch.png)
+A fork of [chat-ui]<https://github.com/huggingface/chat-ui> that supports OpenAI APIs.
 
 A chat interface using open source models, eg OpenAssistant or Llama. It is a SvelteKit app and it powers the [HuggingChat app on hf.co/chat](https://huggingface.co/chat).
 
-0. [No Setup Deploy](#no-setup-deploy)
-1. [Setup](#setup)
-2. [Launch](#launch)
-3. [Web Search](#web-search)
-4. [Extra parameters](#extra-parameters)
-5. [Deploying to a HF Space](#deploying-to-a-hf-space)
-6. [Building](#building)
+1. [No Setup Deploy](#no-setup-deploy)
+2. [Setup](#setup)
+3. [Launch](#launch)
+4. [Web Search](#web-search)
+5. [Extra parameters](#extra-parameters)
+6. [Deploying to a HF Space](#deploying-to-a-hf-space)
+7. [Building](#building)
 
 ##  No Setup Deploy
 
@@ -109,7 +110,7 @@ PUBLIC_APP_DISCLAIMER=
 ```
 
 - `PUBLIC_APP_NAME` The name used as a title throughout the app.
-- `PUBLIC_APP_ASSETS` Is used to find logos & favicons in `static/$PUBLIC_APP_ASSETS`, current options are `chatui` and `huggingchat`.
+- `PUBLIC_APP_ASSETS` Is used to find logos & favicons in `static/$PUBLIC_APP_ASSETS`, current options are `chatui`.
 - `PUBLIC_APP_COLOR` Can be any of the [tailwind colors](https://tailwindcss.com/docs/customizing-colors#default-color-palette).
 - `PUBLIC_APP_DATA_SHARING` Can be set to 1 to add a toggle in the user settings that lets your users opt-in to data sharing with models creator.
 - `PUBLIC_APP_DISCLAIMER` If set to 1, we show a disclaimer about generated outputs on login.
